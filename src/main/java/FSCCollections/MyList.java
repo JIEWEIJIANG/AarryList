@@ -33,9 +33,10 @@ public class MyList {
     
     public void remove(int e){
        if(findElement(e)!=-1){
-           
+          for(int i=findElement(e) ; i<size; i++)
+              elements[i] = elements[i+1];
        }
-     
+       size--;
     }
     
     private int findElement(int e){
@@ -45,15 +46,28 @@ public class MyList {
             return -1;// to indicate that we don't have it  
     }
 
-    @Override
-    public String toString() {
-        String str="";
-        for(int i=0; i<size(); i++)
-            str+= " "+ elements[i];
-        return str;
+    
+    public void prepend(int e){
+       if(size == elements.length){
+            checkCapa();
+        }
+       elements[size]=e;
+       size++;
+        
+        
     }
     
     public int size() {
         return size;
     }
+    
+    @Override
+     public String toString() {
+        String str=" [ ";
+        for(int i=0; i<size()-1; i++)
+            str+=  elements[i] +" , ";
+        str+= elements[size()] +" ]";
+        return str;
+    }
+    
 }
